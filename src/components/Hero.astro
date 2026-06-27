@@ -1,0 +1,56 @@
+---
+import site from "../data/site.json";
+import CTAButton from "./CTAButton.astro";
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <p class="hero__eyebrow">Secular Democrats of Texas</p>
+    <h1 class="hero__title">{site.tagline}</h1>
+    <p class="hero__lede">{site.description}</p>
+    <div class="hero__actions">
+      <CTAButton href="/about/" variant="primary">Learn about us</CTAButton>
+      <CTAButton href={site.contactFormUrl} variant="ghost" external>Get involved</CTAButton>
+      <CTAButton href={site.donateUrl} variant="donate" external>Donate</CTAButton>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background:
+      radial-gradient(1200px 500px at 80% -10%, rgba(29, 111, 184, 0.35), transparent 60%),
+      linear-gradient(180deg, var(--navy), var(--navy-700));
+    color: var(--white);
+    text-align: center;
+  }
+  .hero__inner {
+    padding-block: clamp(3.5rem, 9vw, 7rem);
+    max-width: 860px;
+  }
+  .hero__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #8fc1ec;
+    margin-bottom: 1rem;
+  }
+  .hero__title {
+    color: var(--white);
+    font-size: clamp(2.3rem, 5.5vw, 3.8rem);
+    margin-bottom: 1rem;
+  }
+  .hero__lede {
+    font-size: 1.2rem;
+    color: var(--gray-200);
+    max-width: 60ch;
+    margin: 0 auto 2rem;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+</style>

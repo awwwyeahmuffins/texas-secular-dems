@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Card from "../components/Card.astro";
+import CTAButton from "../components/CTAButton.astro";
+import site from "../data/site.json";
+---
+
+<BaseLayout>
+  <Hero />
+
+  <!-- Mission -->
+  <section class="section">
+    <div class="container section__head">
+      <p class="eyebrow">Our mission</p>
+      <h2>Giving secular Texans a voice in the Democratic Party</h2>
+      <p>
+        We give voice to the millions of secular Texans in our government. We are
+        <strong>not against religion</strong> — we stand for equal treatment for all
+        people: freedom <em>of</em> religion, and freedom <em>from</em> religion.
+      </p>
+    </div>
+  </section>
+
+  <!-- Feature cards -->
+  <section class="section section--gray">
+    <div class="container">
+      <div class="grid grid--3">
+        <Card eyebrow="Who we are" title="About the caucus" href="/about/" cta="Learn more">
+          <p>Founded in 2016 at the Texas Democratic Convention and growing ever since.</p>
+        </Card>
+        <Card eyebrow="The numbers" title="A powerful voting bloc" href="/about/statistics/" cta="See the data">
+          <p>Secular Americans are 28%+ of the Democratic Party — and the fastest-growing segment.</p>
+        </Card>
+        <Card eyebrow="Get involved" title="Join the movement" href={site.contactFormUrl} cta="Volunteer">
+          <p>Volunteer, attend an event, or help us hold leaders accountable to secular values.</p>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured successes -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">What we've done</p>
+        <h2>Real wins for secular values</h2>
+      </div>
+      <div class="grid grid--3">
+        <Card title="3 platform resolutions">
+          <p>Passed into the Texas Democratic Party platform — protecting children, church-state separation, and religiously neutral healthcare.</p>
+        </Card>
+        <Card title="Standing-room caucus">
+          <p>Our 2018 State Convention caucus in Fort Worth drew a standing-room-only crowd.</p>
+        </Card>
+        <Card title="Action on the ground">
+          <p>Demonstrated against conversion therapy in Addison and continue pushing for a ban.</p>
+        </Card>
+      </div>
+      <p style="text-align:center; margin-top:2rem;">
+        <CTAButton href="/successes/" variant="outline">See all our successes</CTAButton>
+      </p>
+    </div>
+  </section>
+
+  <!-- Donate CTA -->
+  <section class="section section--navy">
+    <div class="container section__head">
+      <h2>Help us build a secular Texas</h2>
+      <p>Your contribution powers our organizing, events, and advocacy across the state.</p>
+      <div style="display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap; margin-top:1.5rem;">
+        <CTAButton href={site.donateUrl} variant="donate" external>Donate via ActBlue</CTAButton>
+        <CTAButton href={site.contactFormUrl} variant="ghost" external>Get involved</CTAButton>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

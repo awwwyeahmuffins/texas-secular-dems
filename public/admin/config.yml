@@ -1,0 +1,132 @@
+# Decap CMS configuration
+# -----------------------------------------------------------------------------
+# Editors visit /admin to log in and edit content in the browser.
+# Saving writes commits to the GitHub repo, which triggers a Cloudflare Pages
+# rebuild and republishes the site automatically.
+#
+# BEFORE GOING LIVE, set `repo` below to your GitHub "owner/repository", and
+# deploy the OAuth helper described in README.md, then put its URL in `base_url`.
+
+backend:
+  name: github
+  repo: OWNER/REPO # <-- change to e.g. "secular-tx-dems/texas-secular-dems"
+  branch: main
+  base_url: https://decap-oauth.YOURNAME.workers.dev # <-- your OAuth worker URL
+  auth_endpoint: auth
+
+# Lets you run the CMS locally against your filesystem with `npx decap-server`.
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  # ---- Fixed prose pages -----------------------------------------------------
+  - name: pages
+    label: "Pages"
+    label_singular: "Page"
+    delete: false
+    files:
+      - name: about
+        label: "About Us"
+        file: "src/content/pages/about.md"
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: "Meta description", name: description, widget: text, required: false }
+          - { label: Order, name: order, widget: number, default: 1, required: false }
+          - { label: Body, name: body, widget: markdown }
+      - name: statistics
+        label: "Statistics on Secular Americans"
+        file: "src/content/pages/about/statistics.md"
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: "Meta description", name: description, widget: text, required: false }
+          - { label: Order, name: order, widget: number, default: 2, required: false }
+          - { label: Body, name: body, widget: markdown }
+      - name: why-a-secular-caucus
+        label: "Why We Need a Secular Caucus"
+        file: "src/content/pages/about/why-a-secular-caucus.md"
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: "Meta description", name: description, widget: text, required: false }
+          - { label: Order, name: order, widget: number, default: 3, required: false }
+          - { label: Body, name: body, widget: markdown }
+      - name: by-laws
+        label: "By-Laws"
+        file: "src/content/pages/about/by-laws.md"
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: "Meta description", name: description, widget: text, required: false }
+          - { label: Order, name: order, widget: number, default: 4, required: false }
+          - { label: Body, name: body, widget: markdown }
+      - name: successes
+        label: "Successes"
+        file: "src/content/pages/successes.md"
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: "Meta description", name: description, widget: text, required: false }
+          - { label: Order, name: order, widget: number, default: 5, required: false }
+          - { label: Body, name: body, widget: markdown }
+
+  # ---- Events (volunteers can add/edit/remove) -------------------------------
+  - name: events
+    label: "Events"
+    label_singular: "Event"
+    folder: "src/content/events"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    summary: "{{date}} — {{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: "Date (shown on site)", name: date, widget: string, hint: 'e.g. "July 14, 2022 · 8:30 PM"' }
+      - { label: "Sort date", name: sortDate, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, required: false }
+      - { label: Location, name: location, widget: string, required: false }
+      - { label: "Mark as upcoming", name: upcoming, widget: boolean, default: false }
+      - { label: Details, name: body, widget: markdown, required: false }
+
+  # ---- Endorsements ----------------------------------------------------------
+  - name: endorsements
+    label: "Endorsements"
+    label_singular: "Endorsement"
+    folder: "src/content/endorsements"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{name}} — {{office}}"
+    fields:
+      - { label: "Candidate name", name: name, widget: string }
+      - { label: "Office sought", name: office, widget: string }
+      - { label: "Election cycle", name: cycle, widget: string, required: false }
+      - { label: "Display order", name: order, widget: number, default: 1, required: false }
+      - { label: "Notes (optional)", name: body, widget: markdown, required: false }
+
+  # ---- Global site settings --------------------------------------------------
+  - name: settings
+    label: "Site Settings"
+    delete: false
+    files:
+      - name: site
+        label: "General"
+        file: "src/data/site.json"
+        fields:
+          - { label: "Organization name", name: name, widget: string }
+          - { label: "Short name", name: shortName, widget: string }
+          - { label: Tagline, name: tagline, widget: string }
+          - { label: Description, name: description, widget: text }
+          - { label: "Contact email", name: email, widget: string }
+          - { label: "Donate URL (ActBlue)", name: donateUrl, widget: string }
+          - { label: "Contact form URL", name: contactFormUrl, widget: string }
+          - { label: "Newsletter URL", name: newsletterUrl, widget: string }
+          - label: "Social links"
+            name: social
+            widget: object
+            fields:
+              - { label: Twitter, name: twitter, widget: string }
+              - { label: Facebook, name: facebook, widget: string }
+          - label: "Navigation"
+            name: nav
+            widget: list
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: Link, name: href, widget: string }

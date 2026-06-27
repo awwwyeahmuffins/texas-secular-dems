@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
+import site from "../data/site.json";
+
+const endorsements = (await getCollection("endorsements")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout title="Endorsements" description="Candidates endorsed by the Secular Democrats of Texas.">
+  <section class="section">
+    <div class="container">
+      <header class="section__head">
+        <p class="eyebrow">Where we stand</p>
+        <h1>Our Endorsements</h1>
+        <p>The Secular Democrats of Texas proudly endorse candidates who share our commitment to secular government and the separation of church and state.</p>
+      </header>
+
+      <div class="grid grid--3">
+        {endorsements.map((e) => (
+          <Card title={e.data.name} eyebrow={e.data.cycle ? `${e.data.cycle} cycle` : undefined}>
+            <p>{e.data.office}</p>
+          </Card>
+        ))}
+      </div>
+
+      <div class="endorse-cta">
+        <h2>Seeking our endorsement?</h2>
+        <p>
+          Candidates interested in our endorsement should email
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          to request a copy of our endorsement questionnaire.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .endorse-cta {
+    margin-top: 3.5rem;
+    text-align: center;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 2.5rem 1.5rem;
+  }
+  .endorse-cta p {
+    max-width: 60ch;
+    margin-inline: auto;
+  }
+</style>

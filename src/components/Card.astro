@@ -1,0 +1,62 @@
+---
+interface Props {
+  title: string;
+  href?: string;
+  eyebrow?: string;
+  cta?: string;
+}
+const { title, href, eyebrow, cta } = Astro.props;
+const Tag = href ? "a" : "div";
+---
+
+<Tag class:list={["card", { "card--link": href }]} href={href}>
+  {eyebrow && <p class="card__eyebrow">{eyebrow}</p>}
+  <h3 class="card__title">{title}</h3>
+  <div class="card__body"><slot /></div>
+  {cta && href && <span class="card__cta">{cta} →</span>}
+</Tag>
+
+<style>
+  .card {
+    display: block;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    color: var(--ink);
+    height: 100%;
+  }
+  .card--link {
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card--link:hover {
+    transform: translateY(-3px);
+    border-color: var(--blue);
+    text-decoration: none;
+  }
+  .card__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 0.4rem;
+  }
+  .card__title {
+    margin-bottom: 0.5rem;
+  }
+  .card__body {
+    color: var(--gray-700);
+    font-size: 1rem;
+  }
+  .card__body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .card__cta {
+    display: inline-block;
+    margin-top: 1rem;
+    font-weight: 700;
+    color: var(--blue);
+  }
+</style>

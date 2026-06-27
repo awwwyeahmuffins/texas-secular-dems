@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import site from "../data/site.json";
+---
+
+<BaseLayout title="Contact" description="Get in touch with the Secular Democrats of Texas — questions, volunteering, and more.">
+  <section class="section">
+    <div class="container">
+      <header class="section__head">
+        <p class="eyebrow">Say hello</p>
+        <h1>Contact Us</h1>
+        <p>For all questions and volunteering opportunities, reach out using the form below or email us directly.</p>
+      </header>
+
+      <div class="contact">
+        <div class="contact__methods">
+          <h3>Get in touch</h3>
+          <ul>
+            <li><strong>Email:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li><strong>Twitter / X:</strong> <a href={site.social.twitter} target="_blank" rel="noopener">@SecularTexasDem</a></li>
+            <li><strong>Facebook:</strong> <a href={site.social.facebook} target="_blank" rel="noopener">TexasSecularDems</a></li>
+          </ul>
+
+          <h3>Questions or volunteering?</h3>
+          <p>Use our contact form and we'll get back to you.</p>
+          <a class="btn btn--primary" href={site.contactFormUrl} target="_blank" rel="noopener">Open the contact form</a>
+        </div>
+
+        <div class="contact__embed">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSeGFQpxdPwK04WzCYNI0K8KDNOWA-hJlDNx-qV2Zix3SQBN6g/viewform?embedded=true"
+            title="Contact form"
+            loading="lazy"
+          >Loading…</iframe>
+          <p class="contact__note">
+            The form above is embedded from Google Forms. If it does not load,
+            <a href={site.contactFormUrl} target="_blank" rel="noopener">open it in a new tab</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2.5rem;
+    max-width: 960px;
+    margin-inline: auto;
+  }
+  .contact__methods ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+  .contact__methods li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .contact__embed iframe {
+    width: 100%;
+    height: 720px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    background: var(--gray-50);
+  }
+  .contact__note {
+    font-size: 0.9rem;
+    color: var(--gray-500);
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 760px) {
+    .contact {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

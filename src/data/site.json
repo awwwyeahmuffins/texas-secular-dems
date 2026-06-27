@@ -1,0 +1,25 @@
+{
+  "name": "Secular Democrats of Texas",
+  "shortName": "Secular Dems of Texas",
+  "tagline": "Every party should be a secular party.",
+  "description": "A caucus giving voice to secular Texans in the Democratic Party — advocating freedom of religion, and freedom from religion, for all.",
+  "email": "SecularTexasDem@gmail.com",
+  "donateUrl": "https://secure.actblue.com/",
+  "contactFormUrl": "https://forms.gle/yZSQ4fAFD28A7h8WA",
+  "newsletterUrl": "https://forms.gle/yZSQ4fAFD28A7h8WA",
+  "social": {
+    "twitter": "https://twitter.com/SecularTexasDem",
+    "facebook": "https://www.facebook.com/TexasSecularDems"
+  },
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about/" },
+    { "label": "Statistics", "href": "/about/statistics/" },
+    { "label": "Why a Caucus", "href": "/about/why-a-secular-caucus/" },
+    { "label": "By-Laws", "href": "/about/by-laws/" },
+    { "label": "Successes", "href": "/successes/" },
+    { "label": "Events", "href": "/events/" },
+    { "label": "Endorsements", "href": "/endorsements/" },
+    { "label": "Contact", "href": "/contact/" }
+  ]
+}

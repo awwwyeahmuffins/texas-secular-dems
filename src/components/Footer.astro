@@ -1,0 +1,122 @@
+---
+import site from "../data/site.json";
+const year = 2026;
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div>
+      <div class="brand">
+        <span class="brand__star" aria-hidden="true">★</span>
+        <span class="brand__name">Secular Democrats of Texas</span>
+      </div>
+      <p class="site-footer__tag">{site.tagline}</p>
+      <div class="site-footer__social">
+        <a href={site.social.twitter} target="_blank" rel="noopener" aria-label="Twitter / X">Twitter / X</a>
+        <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+        <a href={`mailto:${site.email}`} aria-label="Email">Email</a>
+      </div>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Footer">
+      <h4>Explore</h4>
+      {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="site-footer__cta">
+      <h4>Get involved</h4>
+      <a href={site.donateUrl} class="btn btn--donate" target="_blank" rel="noopener">Donate via ActBlue</a>
+      <a href={site.contactFormUrl} class="btn btn--ghost" target="_blank" rel="noopener">Volunteer / Contact</a>
+    </div>
+  </div>
+
+  <div class="site-footer__bar">
+    <div class="container">
+      <p>© {year} {site.name}. Political advertising paid for by Secular Democrats of Texas.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy);
+    color: var(--gray-200);
+    margin-top: auto;
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2rem;
+    padding-block: 3rem;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .brand__star {
+    color: var(--red);
+    font-size: 1.4rem;
+  }
+  .brand__name {
+    font-family: var(--font-head);
+    font-weight: 800;
+    color: var(--white);
+    font-size: 1.1rem;
+  }
+  .site-footer__tag {
+    color: var(--gray-200);
+    margin-top: 0.75rem;
+    max-width: 32ch;
+  }
+  .site-footer__social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .site-footer__social a {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .site-footer h4 {
+    color: var(--white);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .site-footer__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .site-footer__nav a {
+    color: var(--gray-200);
+    font-size: 0.97rem;
+  }
+  .site-footer__nav a:hover {
+    color: var(--white);
+  }
+  .site-footer__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .site-footer__bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-block: 1.25rem;
+  }
+  .site-footer__bar p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--gray-200);
+  }
+  @media (max-width: 760px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
