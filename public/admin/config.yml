@@ -9,9 +9,11 @@
 
 backend:
   name: github
-  repo: OWNER/REPO # <-- change to e.g. "secular-tx-dems/texas-secular-dems"
+  repo: awwwyeahmuffins/texas-secular-dems # GitHub "owner/repo"
   branch: main
-  base_url: https://decap-oauth.YOURNAME.workers.dev # <-- your OAuth worker URL
+  # OAuth login is handled by this site itself (Cloudflare Pages Functions in /functions).
+  # base_url must be your live site origin (the domain where /admin is served).
+  base_url: https://texasseculardems.org # <-- change if your final domain differs
   auth_endpoint: auth
 
 # Lets you run the CMS locally against your filesystem with `npx decap-server`.

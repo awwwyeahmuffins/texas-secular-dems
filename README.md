@@ -65,25 +65,29 @@ Content edits (in the CMS or in these files) trigger a rebuild and republish aut
 
 ## Enable browser editing (Decap CMS auth)
 
-Decap needs a small OAuth helper so editors can log in with GitHub. On Cloudflare the
-one-time setup is:
+Decap needs an OAuth helper so editors can log in with GitHub. This repo ships that helper
+built in — the two Cloudflare Pages Functions in `functions/` (`auth.js` and `callback.js`)
+handle the login on the **same domain** as the site, so there's no separate worker to deploy.
+One-time setup:
 
-1. **GitHub OAuth App** — GitHub → Settings → Developer settings → OAuth Apps → New.
-   - Homepage URL: your site URL
-   - Authorization callback URL: `https://<your-oauth-worker>/callback`
-   - Note the **Client ID** and **Client Secret**.
-2. **Deploy an OAuth worker** — use a maintained Cloudflare Worker OAuth provider for Decap
-   (e.g. `cloudflare-pages-decap-oauth` / `decap-cms-cloudflare-pages-oauth`), setting the
-   Client ID and Secret as environment variables. It deploys to
-   `https://decap-oauth.<you>.workers.dev`.
-3. **Point the CMS at it** — in `public/admin/config.yml` set:
+1. **Push the repo to GitHub** and connect it to Cloudflare Pages (see "Deploy" above).
+2. **Create a GitHub OAuth App** — GitHub → Settings → Developer settings → OAuth Apps → New.
+   - Homepage URL: your live site URL (e.g. `https://texasseculardems.org`)
+   - Authorization callback URL: `https://<your-site>/callback`
+   - Note the **Client ID** and generate a **Client Secret**.
+3. **Add the secrets to Cloudflare Pages** — your Pages project → Settings → Environment
+   variables (Production *and* Preview):
+   - `GITHUB_CLIENT_ID` = the Client ID
+   - `GITHUB_CLIENT_SECRET` = the Client Secret (mark as a secret/encrypted)
+   - Redeploy so the functions pick them up.
+4. **Point the CMS at your repo/domain** — in `public/admin/config.yml`:
    - `backend.repo` → `your-github-owner/your-repo`
-   - `backend.base_url` → your worker URL
-4. Editors then go to `/admin`, click **Login with GitHub**, and can edit content. They each
-   need write access (or `editorial_workflow` review access) to the GitHub repo.
+   - `backend.base_url` → your live site origin (e.g. `https://texasseculardems.org`)
+5. Editors go to `/admin`, click **Login with GitHub**, and can edit content. Each editor needs
+   write access to the GitHub repo (or review access via the `editorial_workflow`).
 
-> Until the OAuth worker is configured, `/admin` loads but login won't complete. Local editing
-> via `npx decap-server` works without any of this.
+> Until steps 2–4 are done, `/admin` loads but login won't complete. Local editing via
+> `npx decap-server` + `npm run dev` works without any of this.
 
 ---
 

@@ -8,8 +8,13 @@ const isActive = (href: string) =>
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="/">
-      <span class="brand__star" aria-hidden="true">★</span>
-      <span class="brand__name">Secular Democrats<br /><span>of Texas</span></span>
+      <img
+        class="brand__logo"
+        src="/logo.png"
+        width="800"
+        height="329"
+        alt="Secular Democrats of Texas"
+      />
     </a>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
@@ -60,25 +65,18 @@ const isActive = (href: string) =>
   .brand {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
     text-decoration: none;
-    color: var(--navy);
   }
-  .brand__star {
-    color: var(--red);
-    font-size: 1.6rem;
-    line-height: 1;
+  .brand__logo {
+    display: block;
+    height: 52px;
+    width: auto;
+    max-width: 100%;
   }
-  .brand__name {
-    font-family: var(--font-head);
-    font-weight: 800;
-    font-size: 1.05rem;
-    line-height: 1.05;
-    color: var(--navy);
-  }
-  .brand__name span {
-    font-weight: 600;
-    color: var(--blue);
+  @media (max-width: 480px) {
+    .brand__logo {
+      height: 44px;
+    }
   }
 
   .site-nav {
