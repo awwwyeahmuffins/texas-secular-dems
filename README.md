@@ -53,13 +53,12 @@ Content edits (in the CMS or in these files) trigger a rebuild and republish aut
    - **Build output directory:** `dist`
 4. Deploy. The site goes live at `https://<project>.pages.dev`.
 
-## Add the custom domain
+## Custom domain
 
-1. Register a domain (e.g. `texasseculardems.org`) — **check availability first**; it is
-   referenced by the national org, so you may need an alternative such as `seculartexasdems.org`.
-2. In Cloudflare Pages → your project → **Custom domains → Set up a domain**, enter it and
-   follow the DNS steps. Cloudflare provisions SSL automatically.
-3. Update `site:` in `astro.config.mjs` to the final domain (for correct sitemap/SEO URLs).
+The site uses **`seculartexasdem.com`** (apex + `www`), served via Cloudflare Pages.
+Both are attached to the Pages project and point at `texas-secular-dems.pages.dev`
+through proxied CNAME records; Cloudflare provisions SSL automatically.
+`site:` in `astro.config.mjs` is set to `https://seculartexasdem.com` for sitemap/SEO.
 
 ---
 
@@ -72,7 +71,7 @@ One-time setup:
 
 1. **Push the repo to GitHub** and connect it to Cloudflare Pages (see "Deploy" above).
 2. **Create a GitHub OAuth App** — GitHub → Settings → Developer settings → OAuth Apps → New.
-   - Homepage URL: your live site URL (e.g. `https://texasseculardems.org`)
+   - Homepage URL: your live site URL (e.g. `https://seculartexasdem.com`)
    - Authorization callback URL: `https://<your-site>/callback`
    - Note the **Client ID** and generate a **Client Secret**.
 3. **Add the secrets to Cloudflare Pages** — your Pages project → Settings → Environment
@@ -82,7 +81,7 @@ One-time setup:
    - Redeploy so the functions pick them up.
 4. **Point the CMS at your repo/domain** — in `public/admin/config.yml`:
    - `backend.repo` → `your-github-owner/your-repo`
-   - `backend.base_url` → your live site origin (e.g. `https://texasseculardems.org`)
+   - `backend.base_url` → your live site origin (e.g. `https://seculartexasdem.com`)
 5. Editors go to `/admin`, click **Login with GitHub**, and can edit content. Each editor needs
    write access to the GitHub repo (or review access via the `editorial_workflow`).
 

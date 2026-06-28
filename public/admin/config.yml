@@ -13,7 +13,7 @@ backend:
   branch: main
   # OAuth login is handled by this site itself (Cloudflare Pages Functions in /functions).
   # base_url must be your live site origin (the domain where /admin is served).
-  base_url: https://texasseculardems.org # <-- change if your final domain differs
+  base_url: https://seculartexasdem.com # live site origin where /admin is served
   auth_endpoint: auth
 
 # Lets you run the CMS locally against your filesystem with `npx decap-server`.
